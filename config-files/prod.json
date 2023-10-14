@@ -1,0 +1,29 @@
+{
+    "app": {
+        "name": "",
+        "version": "1.0.0"
+    },
+    "server": {
+        "port": 3000,
+        "mode": "release"
+    },
+    "storage": {
+        "minio": {
+            "url": "",
+            "port": 9000,
+            "auth": {
+                "accessKeyID": "",
+                "secretAccessKey": ""
+            }
+        }
+    },
+    "database": {
+        "postgresql": {
+            "host": "",
+            "port": 5432,
+            "username": "",
+            "password": "",
+            "database": ""
+        }
+    }
+}

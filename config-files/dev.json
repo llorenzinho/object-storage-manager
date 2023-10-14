@@ -1,0 +1,29 @@
+{
+    "app": {
+        "name": "file-manager",
+        "version": "1.0.0"
+    },
+    "server": {
+        "port": 3000,
+        "mode": "release"
+    },
+    "storage": {
+        "minio": {
+            "url": "s3",
+            "port": 9000,
+            "auth": {
+                "accessKeyID": "e94G9DIR5uec2VB6so8S",
+                "secretAccessKey": "nqrHMajQr46Ha5LwoftWg1kAkWXAW8msBvGlq5QP"
+            }
+        }
+    },
+    "database": {
+        "postgresql": {
+            "host": "db",
+            "port": 5432,
+            "username": "postgres",
+            "password": "postgres",
+            "database": "testing"
+        }
+    }
+}

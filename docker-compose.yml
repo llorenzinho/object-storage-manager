@@ -1,0 +1,45 @@
+# docker-compose file with minio and the application built from the Dockerfile
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./app:/app
+      - ./config-files/dev.json:/app/config/config.json
+    ports:
+      - 8080:3000
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=admin
+    depends_on:
+      - s3
+  #     - db
+  s3:
+    image: minio/minio:latest
+    logging:
+      driver: none
+    ports:
+      - 9000:9000
+      - 9001:9001
+    volumes:
+      - ./dev-storage/minio:/data
+    environment:
+      MINIO_ACCESS_KEY: minio_access_key
+      MINIO_SECRET_KEY: minio_secret_key
+      MINIO_ROOT_USER: 'username'
+      MINIO_ROOT_PASSWORD: 'password'
+    command: minio server /var/lib/minio/data --console-address ":9001"
+  # db:
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: postgres
+  #   ports:
+  #     - 5432:5432
+  #   volumes:
+  #     # - ./dev-storage/postgres:/var/lib/postgresql/data
+  #     - ./dev-storage/init.sql:/docker-entrypoint-initdb.d/init.sql
